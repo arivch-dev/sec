@@ -1,0 +1,23 @@
+[Unit]
+Description=Secure Key Management Service (KMS)
+After=network.target
+
+[Service]
+Type=simple
+User=devuser
+Group=devuser
+WorkingDirectory=/opt/kms
+Environment=KMS_MASTER_PASSWORD=TestPassword123
+ExecStart=/opt/kms/kms-server
+Restart=on-failure
+RestartSec=5s
+
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+NoNewPrivileges=yes
+ReadWritePaths=/opt/kms/data
+
+[Install]
+WantedBy=multi-user.target

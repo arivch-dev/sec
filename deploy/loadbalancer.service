@@ -1,0 +1,21 @@
+[Unit]
+Description=Auto Load Balancer Service
+After=network.target
+
+[Service]
+Type=simple
+User=devuser
+Group=devuser
+WorkingDirectory=/opt/loadbalancer
+ExecStart=/opt/loadbalancer/lb-server --port=8080 --algo=adaptive
+Restart=on-failure
+RestartSec=5s
+
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target
